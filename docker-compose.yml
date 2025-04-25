@@ -1,0 +1,15 @@
+services:
+  service-mysql:
+    image: bitnami/mysql
+    ports:
+      - '33066:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+      - MYSQL_DATABASE=pixintegration
+    volumes:
+      - mysql_data:/bitnami/mysql
+
+volumes:
+  mysql_data:
