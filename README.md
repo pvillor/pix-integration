@@ -1,5 +1,15 @@
 # pix-integration
 
+### Clonar repositório
+ ```
+    git clone https://github.com/pvillor/pix-integration
+  ```
+
+### Entrar no projeto
+ ```
+    cd pix-integration
+  ```
+
 ### Instalação de pacotes
   ```
     npm install
@@ -30,3 +40,5 @@
 ```
   npm run dev
 ```
+
+O app estará rodando [aqui](http://localhost:3000)
