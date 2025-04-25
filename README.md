@@ -2,7 +2,7 @@
 
 ### Clonar repositório
  ```
-    git clone https://github.com/pvillor/pix-integration
+    git clone https://github.com/pvillor/pix-integration.git
   ```
 
 ### Entrar no projeto
