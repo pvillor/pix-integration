@@ -36,6 +36,11 @@
     npx prisma migrate dev
   ```
 
+Para garantir o funcionamento do banco de dados, rode o comando abaixo:
+```
+    npx prisma generate
+  ```
+
 ### Rodar o site
 ```
   npm run dev
