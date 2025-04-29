@@ -12,7 +12,7 @@
 
 ### Instalação de pacotes
   ```
-    npm install
+    npm install --legacy-peer-deps
   ```
 
 ### Variáveis de ambiente 
