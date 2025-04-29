@@ -15,16 +15,9 @@ export type CreateChargeInput = z.infer<typeof createChargeSchema>
 
 export interface CreateChargeResponse {
   charge: {
-    id_invoice_pix: number
-    valor: string
-    vencimento: string
-    id_cobrador: string
-    nome_cobrador: string
-    brcode: string
-    status: 'created' | string
-    criacao: string
+    pixId: number
+    type: 'dinamic' | 'static'
     qrcode: string
-    tx_id: string
   }
 }
 

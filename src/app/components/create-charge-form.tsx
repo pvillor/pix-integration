@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
-import { PixInfoDialog } from './pix-info-dialog'
+import { PixDetailsDialog } from './pix-details-dialog'
 import { LoaderPinwheel } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -29,7 +29,6 @@ export function CreateChargeForm() {
     register,
     handleSubmit,
     setValue,
-    reset,
     formState: { errors },
   } = useForm<CreateChargeInput>({
     resolver: zodResolver(createChargeSchema),
@@ -38,12 +37,12 @@ export function CreateChargeForm() {
   const {
     data,
     mutateAsync: createChargeFn,
+    variables,
     isPending,
     isSuccess,
   } = useMutation({
     mutationFn: createCharge,
     onSuccess: () => {
-      reset()
       toast.success('Cobrança pix gerada com sucesso!')
     },
   })
@@ -143,7 +142,13 @@ export function CreateChargeForm() {
         </Button>
       </form>
 
-      {isSuccess && <PixInfoDialog charge={data.charge} />}
+      {isSuccess && (
+        <PixDetailsDialog
+          pixId={data.charge.pixId}
+          type={variables.type}
+          qrcode={data.charge.qrcode}
+        />
+      )}
     </div>
   )
 }

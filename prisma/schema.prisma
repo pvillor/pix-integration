@@ -8,36 +8,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ChargeStatus {
+  CREATED
+  EXPIRED
+  PAID
+  CREDITED
+}
+
 model Charge {
-  id               String    @id @default(uuid())
+  id               String       @id @default(uuid())
+  pixId            Int?         @unique @map("pix_id")
   type             String
   amount           Int
   description      String
-  dueDate          DateTime? @map("due_date")
-  externalId       String    @unique @map("external_id")
-  transactionId    String    @unique @map("transaction_id")
-  instructionText  String    @map("instruction_text")
-  customerName     String?   @map("customer_name")
-  customerDocument String?   @map("customer_document")
-  customerEmail    String?   @map("customer_email")
-  createdAt        DateTime  @default(now()) @map("created_at")
+  dueDate          DateTime?    @map("due_date")
+  externalId       String       @unique @map("external_id")
+  transactionId    String       @unique @map("transaction_id")
+  instructionText  String       @map("instruction_text")
+  customerName     String?      @map("customer_name")
+  customerDocument String?      @map("customer_document")
+  customerEmail    String?      @map("customer_email")
+  status           ChargeStatus @default(CREATED)
+  createdAt        DateTime     @default(now()) @map("created_at")
 
   @@map("charges")
 }
 
 model ChargeBackup {
-  id               String    @id @default(uuid())
+  id               String       @id @default(uuid())
+  pixId            Int?         @unique @map("pix_id")
   type             String
   amount           Int
   description      String
-  dueDate          DateTime? @map("due_date")
-  externalId       String    @unique @map("external_id")
-  transactionId    String    @unique @map("transaction_id")
-  instructionText  String    @map("instruction_text")
-  customerName     String?   @map("customer_name")
-  customerDocument String?   @map("customer_document")
-  customerEmail    String?   @map("customer_email")
-  createdAt        DateTime  @default(now()) @map("created_at")
+  dueDate          DateTime?    @map("due_date")
+  externalId       String       @unique @map("external_id")
+  transactionId    String       @unique @map("transaction_id")
+  instructionText  String       @map("instruction_text")
+  customerName     String?      @map("customer_name")
+  customerDocument String?      @map("customer_document")
+  customerEmail    String?      @map("customer_email")
+  status           ChargeStatus @default(CREATED)
+  createdAt        DateTime     @default(now()) @map("created_at")
 
   @@map("charges_backup")
 }
