@@ -29,7 +29,7 @@ export function ExpiredCharge({ data }: ExpiredChargeProps) {
       <DialogHeader>
         <DialogTitle>Pagamento expirado.</DialogTitle>
         <DialogDescription>
-          O pagamento desta cobrança passoudo prazo de validade.
+          O pagamento desta cobrança passou do prazo de validade.
         </DialogDescription>
       </DialogHeader>
 

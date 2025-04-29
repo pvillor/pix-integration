@@ -21,14 +21,26 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { PixDetailsDialog } from './pix-details-dialog'
-import { LoaderPinwheel } from 'lucide-react'
+import { CalendarIcon, LoaderPinwheel } from 'lucide-react'
 import { toast } from 'sonner'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { format } from 'date-fns'
+import { useState } from 'react'
+import { Calendar } from '@/components/ui/calendar'
+import { ptBR } from 'date-fns/locale'
 
 export function CreateChargeForm() {
+  const [date, setDate] = useState<Date>()
+
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateChargeInput>({
     resolver: zodResolver(createChargeSchema),
@@ -66,6 +78,8 @@ export function CreateChargeForm() {
       dueDate,
     })
   }
+
+  const chargeType = watch('type')
 
   return (
     <div className="space-y-5">
@@ -136,6 +150,45 @@ export function CreateChargeForm() {
             <span className="text-xs text-red-600">{errors.type.message}</span>
           )}
         </div>
+
+        {chargeType === 'dinamic' && (
+          <div className="space-y-2">
+            <Label htmlFor="date">Data de vencimento</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start text-left font-normal bg-zinc-100"
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? (
+                    format(date, 'PPP', { locale: ptBR })
+                  ) : (
+                    <span>Escolha uma data</span>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={selectedDate => {
+                    if (selectedDate) {
+                      setDate(selectedDate)
+                      setValue('dueDate', selectedDate)
+                    }
+                  }}
+                  locale={ptBR}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+            <span className="text-xs text-zinc-400">
+              Coloque a data de hoje ou antes para testar o modal de cobrança
+              expirada.
+            </span>
+          </div>
+        )}
 
         <Button type="submit" className="w-full">
           {isPending ? <LoaderPinwheel className="animate-spin" /> : 'Gerar'}

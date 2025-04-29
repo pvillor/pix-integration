@@ -3,7 +3,7 @@ import { PaidCharge } from './paid-charge'
 import { PayChargeInfo } from './pay-charge-info'
 import { useQuery } from '@tanstack/react-query'
 import { getChargeInfo } from '@/http/get-charge-info'
-import { SparklesIcon } from 'lucide-react'
+import { ExpiredCharge } from './expired-charge'
 
 interface PixDetailsDialogContentProps {
   data: {
@@ -37,7 +37,7 @@ export function PixDetailsDialogContent({
 
       {charge.status === 'CREDITED' && <PaidCharge data={charge} />}
 
-      {charge.status === 'EXPIRED' && <PaidCharge data={charge} />}
+      {charge.status === 'EXPIRED' && <ExpiredCharge data={charge} />}
     </DialogContent>
   )
 }

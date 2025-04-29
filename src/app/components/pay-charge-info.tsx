@@ -39,7 +39,12 @@ export function PayChargeInfo({ data, brcode, qrcode }: PayChargeInfoProps) {
     mutationFn: simulatePayment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['charge'] })
-      toast.success('Pagamento efetuado com sucesso!')
+
+      if (data.type === 'dinamic' && new Date(data.dueDate) < new Date()) {
+        toast.error('Ocorreu um erro no pagamento')
+      } else {
+        toast.success('Pagamento efetuado com sucesso!')
+      }
     },
   })
 

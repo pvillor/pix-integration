@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       externalId,
       instructionText: 'Instructions',
       transactionId: charge.data.tx_id,
-      dueDate: body.type === 'dinamic' ? charge.data.vencimento : undefined,
+      dueDate: body.type === 'dinamic' ? body.dueDate : undefined,
     },
   })
 
